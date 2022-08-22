@@ -22,7 +22,6 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
-    // eslint-disable-next-line no-underscore-dangle
     const _usuario_logado = LocalStorageService.getItemObj(_USUARIO_LOGADO);
     if (_usuario_logado && _usuario_logado.id) {
       this.lancamentoService.obterSaldo(_usuario_logado.id).then((response) => {
@@ -40,9 +39,12 @@ class Home extends React.Component {
       <div className="jumbotron">
         <h1 className="display-3">Bem vindo!</h1>
         <p className="lead">Esse é seu sistema de finanças.</p>
-        <p className="lead">Seu saldo para o mês atual é de R${this.state.saldo}</p>
+        <p className="lead">Seu saldo para o mês atual é de <span style={{fontWeight: 'bold'}}>
+            R${this.state.saldo}
+          </span>
+        </p>
         <hr className="my-4"/>
-        <p>E essa é sua área administrativa, utilize um dos menus ou botões abaixo para navegar pelo sistema.</p>
+        <p>Essa é sua área administrativa, utilize um dos menus ou botões abaixo para navegar pelo sistema.</p>
         <p className="lead">
           <Link to={ROTA_CADASTRO_USUARIOS} style={MARGIN_RIGHT_5PX} className="btn btn-primary btn-lg" role="button">
             <i className={'pi pi-user-plus'}></i> Cadastrar Usuário

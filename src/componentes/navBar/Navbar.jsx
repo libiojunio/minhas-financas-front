@@ -28,8 +28,8 @@ class Navbar extends React.Component {
             </button>
             <div className="collapse navbar-collapse" id="navbarResponsive">
               <ul className="navbar-nav">
-                <NavbarItem show href={ROTA_CADASTRO_USUARIOS} label={'Usuários'} />
                 <NavbarItem show={this.props.isUsuarioAutenticado} href={'/'} label={'Home'} />
+                <NavbarItem show href={ROTA_CADASTRO_USUARIOS} label={'Cadastro de usuários'} />
                 <NavbarItem show={this.props.isUsuarioAutenticado}
                             href={ROTA_CONSULTA_LANCAMENTOS} label={'Lançamentos'} />
                 {this.props.isUsuarioAutenticado ?

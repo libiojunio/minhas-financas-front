@@ -32,8 +32,6 @@
         "import/prefer-default-export": "off",
         "linebreak-style": "off",
         "no-plusplus": "off",
-        // disallow certain syntax forms
-        // http://eslint.org/docs/rules/no-restricted-syntax
         "no-restricted-syntax": [
             "error",
             {
@@ -49,7 +47,7 @@
                 "message": "`with` is disallowed in strict mode because it makes code impossible to predict and optimize."
             }
         ],
-        "no-underscore-dangle": ["error", {
+        "no-underscore-dangle": ["off", {
             // Necessário permitir a variável abaixo para utilizar redux dev tools no chrome
             "allow": ["__REDUX_DEVTOOLS_EXTENSION__"],
             "allowAfterThis": true
@@ -63,6 +61,6 @@
             }
         ],
         "react/prop-types": "off",
-        "react/require-default-props": "warn"
+        "react/require-default-props": "off"
     }
 }
