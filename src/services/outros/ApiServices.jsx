@@ -1,7 +1,6 @@
 import axios from 'axios';
 
-export const urlBase = 'http://localhost:8080/';
-// export const urlBase = 'https://minhas-financas-libio.herokuapp.com/';
+export const urlBase = 'https://minhas-financas-libio.herokuapp.com/';
 
 export default class ApiServices {
 
