@@ -1,4 +1,6 @@
 import axios from 'axios';
+import LocalStorageService from './LocalStorageService';
+import {_USUARIO_LOGADO} from '../../utils/constantes';
 
 export const urlBase = 'http://localhost:8080/';
 
@@ -10,6 +12,10 @@ export default class ApiServices {
 
   constructor(apiUrl) {
     this.urlFinal = `${urlBase}${apiUrl}`;
+    const _usuario_logado = LocalStorageService.getItemObj(_USUARIO_LOGADO);
+    if (_usuario_logado && _usuario_logado.token){
+      ApiServices.registrarToken(_usuario_logado.token);
+    }
   }
 
   static registrarToken(token) {
