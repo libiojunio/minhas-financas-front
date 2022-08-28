@@ -8,11 +8,13 @@ import {
   ROTA_CADASTRO_LANCAMENTOS,
   ROTA_CONSULTA_LANCAMENTOS,
   ROTA_HOME,
-  ROTA_LOGIN
+  ROTA_LOGIN, _USUARIO_LOGADO
 } from '../../utils/constantes';
 import ConsultaLancamentos from '../../views/lancamentos/ConsultaLancamentos';
 import CadastroLancamentos from '../../views/lancamentos/CadastroLancamentos';
 import {withRouter} from '../../componentes/withRouter';
+import LocalStorageService from '../../services/outros/LocalStorageService';
+import AuthService from '../../services/authService/AuthService';
 
 class Rotas extends React.Component {
   constructor(props) {
@@ -20,8 +22,20 @@ class Rotas extends React.Component {
     this.state = {};
   }
 
+  isTokenValido(){
+    const _usuario_logado = LocalStorageService.getItemObj(_USUARIO_LOGADO);
+    if (_usuario_logado && _usuario_logado.token) {
+     if (Date.now() > new Date(_usuario_logado.dataHoraExpiracaoToken)){
+       this.props.setIsUsuarioAutenticado();
+       AuthService.limparDadosUsuarioLogado();
+       this.props.navigate(ROTA_LOGIN);
+     }
+    }
+    return true;
+  }
+
   render() {
-    if (this.props.isUsuarioAutenticado){
+    if (this.props.isUsuarioAutenticado && this.isTokenValido()){
       return (
         <Routes>
           <Route path={ROTA_HOME} element={<Home />} />
