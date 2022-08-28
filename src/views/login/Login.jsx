@@ -9,6 +9,7 @@ import usuarioService from '../../services/usuario/UsuarioService';
 import LocalStorageService from '../../services/outros/LocalStorageService';
 import {exibirMensagemErroApi, exibirMensagemSucesso} from '../../componentes/toastr';
 import {MSG_USUARIO_AUTENTICADO_COM_SUCESSO} from '../../utils/mensagens';
+import ApiServices from '../../services/outros/ApiServices';
 
 class Login extends React.Component {
 
@@ -31,6 +32,7 @@ class Login extends React.Component {
   autenticar = () => {
     this.usuarioService.autenticar(this.state.formulario).then((response) => {
       LocalStorageService.setItem(_USUARIO_LOGADO, JSON.stringify(response.data));
+      ApiServices.registrarToken(response.data.token);
       this.props.setIsUsuarioAutenticado();
       exibirMensagemSucesso(MSG_USUARIO_AUTENTICADO_COM_SUCESSO);
       this.props.navigate(ROTA_HOME);
