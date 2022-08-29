@@ -4,7 +4,7 @@ import {
   _USUARIO_LOGADO,
   MARGIN_RIGHT_5PX,
   ROTA_CADASTRO_USUARIOS,
-  ROTA_CONSULTA_LANCAMENTOS,
+  ROTA_CONSULTA_LANCAMENTOS, ROTA_LOGIN,
 } from '../../utils/constantes';
 import {withRouter} from '../../componentes/withRouter';
 import lancamentoService from '../../services/lancamento/LancamentoService';
@@ -38,19 +38,27 @@ class Home extends React.Component {
       <div className="jumbotron">
         <h1 className="display-3">Bem vindo!</h1>
         <p className="lead">Esse é seu sistema de finanças.</p>
-        <p className="lead">Seu saldo para o mês atual é de <span style={{fontWeight: 'bold'}}>
+        {!this.props.isUsuarioNaoAutenticado &&
+          <p className="lead">Seu saldo para o mês atual é de <span style={{fontWeight: 'bold'}}>
             R${this.state.saldo}
           </span>
-        </p>
+          </p>
+        }
         <hr className="my-4"/>
         <p>Essa é sua área administrativa, utilize um dos menus ou botões abaixo para navegar pelo sistema.</p>
         <p className="lead">
+          {this.props.isUsuarioNaoAutenticado &&
+            <Link to={ROTA_LOGIN} style={MARGIN_RIGHT_5PX} className="btn btn-success btn-lg" role="button">
+              <i className={'pi pi-sign-in'}></i> Login
+            </Link>}
           <Link to={ROTA_CADASTRO_USUARIOS} style={MARGIN_RIGHT_5PX} className="btn btn-primary btn-lg" role="button">
             <i className={'pi pi-user-plus'}></i> Cadastrar Usuário
           </Link>
-          <Link to={ROTA_CONSULTA_LANCAMENTOS} className="btn btn-danger btn-lg" role="button">
-            <i className={'pi pi-plus'}></i> Cadastrar Lançamento
-          </Link>
+          {!this.props.isUsuarioNaoAutenticado &&
+            <Link to={ROTA_CONSULTA_LANCAMENTOS} className="btn btn-danger btn-lg" role="button">
+              <i className={'pi pi-plus'}></i> Cadastrar Lançamento
+            </Link>
+          }
         </p>
       </div>
     );
