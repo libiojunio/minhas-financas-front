@@ -31,6 +31,9 @@ class Rotas extends React.Component {
        this.props.navigate(ROTA_LOGIN);
      }
     }
+    else {
+      return false;
+    }
     return true;
   }
 
