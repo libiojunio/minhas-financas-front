@@ -31,6 +31,9 @@ class Rotas extends React.Component {
        this.props.navigate(ROTA_LOGIN);
      }
     }
+    else {
+      return false;
+    }
     return true;
   }
 
@@ -54,7 +57,7 @@ class Rotas extends React.Component {
       if (
         this.props.location.pathname !== ROTA_CADASTRO_USUARIOS &&
         this.props.location.pathname !== ROTA_LOGIN){
-        this.props.navigate(ROTA_LOGIN);
+        return (<Home isUsuarioNaoAutenticado />);
       }
 
       return (
